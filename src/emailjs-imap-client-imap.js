@@ -20,7 +20,7 @@
 
     var COMMAND_REGEX = /(\{(\d+)(\+)?\})?\r?\n/;
     var EOL = '\r\n';
-
+l
     /**
      * Creates a connection object to an IMAP server. Call `connect` method to inititate
      * the actual connection, the constructor only defines the properties but does not actually connect.
@@ -200,7 +200,9 @@
                 this.close().then(resolve).catch(reject);
             };
 
-            this.enqueueCommand('LOGOUT');
+            this.enqueueCommand('LOGOUT').then(()=>{
+                this.socket.close();
+            });
         });
     };
 
